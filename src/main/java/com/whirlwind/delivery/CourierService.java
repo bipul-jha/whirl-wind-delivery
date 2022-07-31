@@ -15,7 +15,7 @@ public class CourierService {
     public float computeDiscountedAmount(Package pkg){
         for(Discount discount : discounts){
             if(pkg.getOfferCode().equals(discount.getCode()) && pkg.isOfferApplicable(discount)){
-                float discountedAmount = computeTotalAmount(pkg) * discount.getPercentage();
+                float discountedAmount = (computeTotalAmount(pkg) * discount.getPercentage()) / (100);
                 pkg.setDiscountedAmount(discountedAmount);
                 return discountedAmount;
             }

@@ -16,16 +16,17 @@ public class WhirlWindApplication {
         discounts[2] = new Discount("OFR003", 5, new WeightRange(10,150), new DistanceRange(50,250));
 
         //Input
+        System.out.println("Give inputs here!");
         Scanner scn = new Scanner(System.in);
-        float baseDeliveryCost = scn.nextFloat();
-        int noOfPackages = scn.nextInt();
+        float baseDeliveryCost = Float.parseFloat(scn.nextLine());
+        int noOfPackages = Integer.parseInt(scn.nextLine());
 
         Package[] packages = new Package[noOfPackages];
 
         for(int i=0; i<noOfPackages; i++){
             String id = scn.nextLine();
-            float weight = scn.nextFloat();
-            float destinationDistance = scn.nextFloat();
+            float weight = Float.parseFloat(scn.nextLine());
+            float destinationDistance = Float.parseFloat(scn.nextLine());
             String offerCode = scn.nextLine();
 
             packages[i] = new Package(id, weight, destinationDistance, offerCode);
@@ -35,7 +36,8 @@ public class WhirlWindApplication {
 
         //Output
         for(int i=0; i<noOfPackages; i++){
-            System.out.print(courierService.computeDiscountedAmount(packages[i]));
+            System.out.print(packages[i].getId() + " ");
+            System.out.print(courierService.computeDiscountedAmount(packages[i]) + " ");
             System.out.print(courierService.computeTotalAmount(packages[i]));
             System.out.println();
         }
