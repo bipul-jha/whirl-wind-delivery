@@ -36,3 +36,5 @@ NA
 200
 ```
 
+Discount related data is prepopulated in WhirlWindApplication.java (Feel free to change it if required)
+
