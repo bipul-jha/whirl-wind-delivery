@@ -105,7 +105,7 @@ public class CourierService {
         if(availableVehicle != null){
             for(Package pkg : packages){
                 pkg.setPickedForDelivery();
-                float estimatedDeliveryTimeForPackage = pkg.getDestinationDistance()/availableVehicle.getMaxSpeed();
+                float estimatedDeliveryTimeForPackage = (float) (Math.round(pkg.getDestinationDistance()/availableVehicle.getMaxSpeed() * 100.0) / 100.0);
                 pkg.setEstimatedDeliveryTime(estimatedDeliveryTimeForPackage);
                 if(estimatedDeliveryTimeForPackage > estimatedDeliveryTimeOfTheFarthestPackage)
                     estimatedDeliveryTimeOfTheFarthestPackage = estimatedDeliveryTimeForPackage;
@@ -124,7 +124,7 @@ public class CourierService {
 
             for(Package pkg : packages){
                 pkg.setPickedForDelivery();
-                float estimatedDeliveryTimeForPackage = pkg.getDestinationDistance()/fastReturningVehicle.getMaxSpeed();
+                float estimatedDeliveryTimeForPackage = (float) (Math.round(pkg.getDestinationDistance()/fastReturningVehicle.getMaxSpeed() * 100.0) / 100.0);
                 pkg.setEstimatedDeliveryTime(minTimeNeededForVehicleToReturn + estimatedDeliveryTimeForPackage);
                 if(estimatedDeliveryTimeForPackage > estimatedDeliveryTimeOfTheFarthestPackage)
                     estimatedDeliveryTimeOfTheFarthestPackage = estimatedDeliveryTimeForPackage;
