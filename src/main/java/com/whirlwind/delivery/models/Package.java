@@ -7,6 +7,8 @@ public class Package {
     private final String offerCode;
     private float totalCost;
     private float discountedAmount;
+    private float estimatedDeliveryTime;
+    private boolean isPickedForDelivery = false;
 
     public Package(String id, float weight, float destinationDistance, String offerCode) {
         this.id = id;
@@ -53,5 +55,29 @@ public class Package {
 
     public void setDiscountedAmount(float discountedAmount) {
         this.discountedAmount = discountedAmount;
+    }
+
+    public void setEstimatedDeliveryTime(float estimatedDeliveryTime) {
+        this.estimatedDeliveryTime = estimatedDeliveryTime;
+    }
+
+    public boolean isPickedForDelivery() {
+        return isPickedForDelivery;
+    }
+
+    public void setPickedForDelivery(){
+        this.isPickedForDelivery = true;
+    }
+
+    public float getEstimatedDeliveryTime() {
+        return estimatedDeliveryTime;
+    }
+
+    public float getDiscountedAmount() {
+        return discountedAmount;
+    }
+
+    public float getTotalCost() {
+        return totalCost;
     }
 }

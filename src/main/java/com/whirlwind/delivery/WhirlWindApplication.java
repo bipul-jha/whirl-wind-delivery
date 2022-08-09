@@ -1,9 +1,7 @@
 package com.whirlwind.delivery;
 
-import com.whirlwind.delivery.models.Discount;
-import com.whirlwind.delivery.models.DistanceRange;
 import com.whirlwind.delivery.models.Package;
-import com.whirlwind.delivery.models.WeightRange;
+import com.whirlwind.delivery.models.*;
 
 import java.util.Scanner;
 
@@ -32,13 +30,24 @@ public class WhirlWindApplication {
             packages[i] = new Package(id, weight, destinationDistance, offerCode);
         }
 
-        CourierService courierService = new CourierService(baseDeliveryCost, discounts);
+        int noOfVehicles = Integer.parseInt(scn.nextLine());
+        Vehicle[] vehicles = new Vehicle[noOfVehicles];
+        float maxSpeed = Float.parseFloat(scn.nextLine());
+        float maxCarriableWeight = Float.parseFloat(scn.nextLine());
+        for(int i = 0; i < noOfVehicles; i++){
+            vehicles[i] = new Vehicle(maxSpeed, maxCarriableWeight);
+        }
+
+        CourierService courierService = new CourierService(baseDeliveryCost, discounts, packages, vehicles);
+        courierService.computeEstimatedDeliveryTimeForPackages();
 
         //Output
         for(int i=0; i<noOfPackages; i++){
             System.out.print(packages[i].getId() + " ");
-            System.out.print(courierService.computeDiscountedAmount(packages[i]) + " ");
-            System.out.print(courierService.computeTotalAmount(packages[i]));
+            courierService.computeDiscountedAndTotalAmount(packages[i]);
+            System.out.print(packages[i].getDiscountedAmount() + " ");
+            System.out.print(packages[i].getTotalCost() + " ");
+            System.out.print(packages[i].getEstimatedDeliveryTime() + " ");
             System.out.println();
         }
     }
